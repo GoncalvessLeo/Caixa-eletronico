@@ -1,0 +1,190 @@
+<html>
+
+<head>
+
+	<script>
+		var saldo = 100.5; //Float
+		var senha = 3589
+
+		var nome = prompt("Olá, informe o seu nome: ")
+			alert(`Seja muito bem vindo(a) ${nome}, é um prazer ter você por aqui`);
+
+
+		function inicio() {
+
+			var escolha = parseInt(prompt('Selecione uma opção: 1.) Saldo, 2.)Extrato, 3.)Saque, 4.)Depósito, 5.)Transferência, 6.)Sair'));
+
+			switch (escolha) {
+				case 1: 
+					alert(`Você selecionou a opção "Saldo"`);
+					var usenha = parseInt(prompt("Digite a senha para continuar: "));
+					if (senha == usenha) {
+						ver_saldo();
+					}
+					else {
+						alert("erro, a senha digitada está incorreta. ");
+						inicio();
+					}
+					break;
+				case 2:
+					alert(`Você selecionou a opção "Extrato"`);
+					var usenha = parseInt(prompt("Digite a senha para continuar: "));
+					if (senha == usenha) {
+						extrato();
+					}
+					else {
+						alert("erro, a senha digitada está incorreta. ");
+						inicio();
+					}
+					inicio()
+					break;
+				case 3 :
+					alert(`Você selecionou a opção "Saque" `);
+					var usenha = parseInt(prompt("Digite a senha para continuar: "));
+					if (senha == usenha) {
+						fazer_saque();
+					}
+					else {
+						alert("erro, a senha digitada está incorreta. ");
+						inicio();
+					}
+					inicio()
+					break;
+				case 4:
+					alert(`Você selecionou a opção "Depósito" `);
+					var usenha = parseInt(prompt("Digite a senha para continuar: "));
+					if (senha == usenha) {
+						fazer_deposito();
+					}
+					else {
+						alert("erro, a senha digitada está incorreta. ");
+						inicio();
+					}
+					inicio()
+					break;
+				case 5:
+					alert(`Você selecionou a opção "Tranferência"`)
+					var usenha = parseInt(prompt("Digite a senha para continuar: "));
+					if (senha == usenha) {
+						transferencia();
+					}
+					else {
+						alert("erro, a senha digitada está incorreta. ");
+						inicio();
+					}
+					inicio()
+					break;
+				case 6: 
+				 	alert(`Você selecionou a opção "Sair"`)
+					sair();
+					break;
+				default:
+					erro();
+					break;
+			}
+
+		}		
+
+		function ver_saldo() {
+			alert('Seu saldo atual é: ' + saldo);
+			inicio();
+		}
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number
+			if (isNaN(deposito) || deposito === '') {
+				alert('Por favor, informe um número:');
+				fazer_deposito();
+			}
+			else {
+				saldo += deposito;
+				ver_saldo();
+			}
+		}
+
+		function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			if (isNaN(saque) || saque === '') {
+				alert('Por favor, informe um número:');
+				fazer_saque();
+			}else if(saque == 0){
+				alert("Operação não autorizada, o valor de saque não pode ser 0");
+			} else if(saque<saldo){
+				saldo -= saque;
+				ver_saldo();
+			}else {
+				alert("Operação não autorizada, saldo insuficiente");
+				
+			}
+		}
+
+		//função de extrato
+
+		function extrato() {
+			const compras = {"Conta de internet": 120,
+							 "Mercado": 980,
+							 "Smartphone Samsung" :2300}
+			alert(JSON.stringify(compras))
+		}
+
+			//função de transferência
+
+			function transferencia() {
+				let idconta = parseInt(prompt("Digite o numero da conta que irá tranferir: "))
+
+				if(isNaN(idconta) || idconta == '') {
+					alert("Por favor, digite um número válido. ");
+					transferencia();
+				}
+				else if(idconta <= 0) {
+					alert("Zero não é um número válido. ")
+					transferencia();
+				}
+				else {
+					var valort = parseInt(prompt("Digite o valor da transferência: "));
+				
+
+					if(valort <= 0){
+					alert("Operação não autorizada, digite um valor válido.: ");
+					}
+					else if(valort < saldo) {
+					saldo-= valort;
+					ver_saldo();
+					}
+					else {
+					alert("Operação não autorizada, saldo insuficiente. ");
+					}
+		    	}
+			}
+	
+		//função erro
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		//função sair
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(`${nome}, Agradecemos por utilizar nossa plataforma, volte sempre!! `)
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+		
+		
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
